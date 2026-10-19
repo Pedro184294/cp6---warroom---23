@@ -8,7 +8,7 @@
 > **Os incidentes da madrugada são revelados só em aula.** O título de cada registro
 > será **ditado pelo professor na hora**; ninguém se antecipe.
 
-**Grupo (nome da equipe plantonista):** _________Grupo 23_____________________________
+**Grupo (nome da equipe plantonista):** _________________Grupo 23________________
 
 **Turma:** 2CCPG **Repo:** `cp6---warroom---23`
 
@@ -35,6 +35,7 @@ rodada seguinte):
 ```text
 decisao: R1 - opcao C (corrige saldo e adiciona teste)
 decisao: R2 - opcao A (PreparedStatement com parametros vinculados)
+decisao: R3 - opcao A (corrige Singleton do gerador de contas)
 pos-mortem: relatorio de incidente da madrugada
 ```
 
@@ -69,7 +70,8 @@ segurança × faturamento × dívida). "Porque é mais seguro" não é justifica
 > A cada incidente, o professor dita o título. Registrem a alternativa escolhida,
 > a justificativa e o placar após a consequência.
 >
-> **Eventos relâmpago:** registrem apenas se o grupo for afetado e chamado pelo professor.
+> **Eventos relâmpago:** registrem apenas se o grupo for **afetado** (o professor
+> chama quem for; não ser chamado é bom sinal).
 
 *(Placar inicial: 🔥 7 · 💰 R$ 0 mil · 🧹 2)*
 
@@ -103,6 +105,16 @@ Escolhemos utilizar `try-with-resources` para garantir que as conexões e os dem
 
 **Placar do grupo após esta decisão:** 🔥 8 · 💰 R$ 35 mil · 🧹 1
 
+## A noite das contas gêmeas
+
+**Tipo:** rodada · **Voto:** A
+
+**Justificativa:**
+
+Escolhemos corrigir o padrão Singleton para que o método `getInstancia()` retorne a mesma instância do gerador, em vez de criar um novo objeto a cada chamada. Essa correção resolve o defeito identificado na implementação e melhora a confiabilidade do sistema, com impacto controlado no prazo e no custo.
+
+**Placar do grupo após esta decisão:** 🔥 9 · 💰 R$ 40 mil · 🧹 1
+
 ---
 
 ## 🔎 O caminho do MEU grupo (preencher na 3ª aula, quando o mapa for revelado)
@@ -111,9 +123,10 @@ Uma linha por decisão registrada acima (usem os títulos ditados em aula):
 
 | # | Decisão | Nossa letra | Consequência que ELA teria tido |
 |---|---|---|---|
-| 1 | O saldo que virou negativo | C | Correção da validação do saldo e teste automatizado; reputação +1, prejuízo +R$ 35 mil e dívida técnica −1. |
-| 2 | A injeção que derreteu o banco | A | Uso de `PreparedStatement` com parâmetros vinculados; sem alteração no placar. |
-| 3 | As conexões se fecham | A | Correção do vazamento com `try-with-resources`; sem alteração no placar. |
+| 1 | O saldo que virou negativo | C | Corrigir a validação do saldo e adicionar teste; reputação +1, prejuízo +R$ 35 mil e dívida técnica −1. |
+| 2 | A injeção que derreteu o banco | A | Usar `PreparedStatement` com parâmetros vinculados; sem alteração no placar. |
+| 3 | As conexões se fecham | A | Corrigir o vazamento com `try-with-resources`; sem alteração no placar. |
+| 4 | A noite das contas gêmeas | A | Corrigir o Singleton; reputação +1, prejuízo +R$ 5 mil e dívida técnica sem alteração. |
 
 *(Adicionem linhas conforme as decisões da madrugada. Completem as consequências finais quando o mapa for revelado.)*
 
