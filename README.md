@@ -10,7 +10,9 @@
 
 **Grupo (nome da equipe plantonista):** Grupo 23
 
-**Turma:** 2CCPG **Repo:** `cp6---warroom---23`
+**Turma:** 2CCPG 
+
+**Repo:** `cp6---warroom---23`
 
 **Integrantes (nome + RM):**
 
@@ -27,8 +29,8 @@
 
 1. Um integrante cria o repo **público** no GitHub: `cp6-warroom-<nome-do-grupo>`
    (ex.: `cp6-warroom-debugadores`), com um README qualquer.
-2. Substituam o conteúdo do `README.md` por este template (no navegador, pelo próprio
-   GitHub, ou clonando):
+2. Substituam o conteúdo do `README.md` por esta ficha, no navegador, pelo próprio
+   GitHub, ou clonando o repositório:
 
    ```bash
    git clone https://github.com/Pedro184294/cp6---warroom---23.git
@@ -77,13 +79,10 @@ segurança × faturamento × dívida). "Porque é mais seguro" não é justifica
 
 # 📝 REGISTRO DE DECISÕES
 
-> A cada incidente, o professor dita o título (ex.: "Rodada 1"). **Copiem o modelo
-> abaixo, colem no fim desta seção** e preencham com o rascunho feito em aula, junto
-> com o **placar do grupo** após a consequência. Commitem 1 commit por rodada até
-> 23h59 do dia.
+> A cada incidente, o professor dita o título. Registrem a opção escolhida, a justificativa
+> técnica e o placar após a consequência. Commitem 1 commit por rodada até 23h59 do dia.
 >
-> **Eventos relâmpago:** registrem apenas se o grupo for **afetado** (o professor
-> chama quem for; não ser chamado é bom sinal).
+> **Eventos relâmpago:** registrem apenas se o grupo for afetado pelas regras do evento.
 
 *(Placar inicial: 🔥 7 · 💰 R$ 0 mil · 🧹 2)*
 
@@ -131,7 +130,7 @@ O `try-with-resources` garante o fechamento automático de recursos, como conex�
 
 **Justificativa:**
 
-O método deve retornar a instância existente, em vez de criar um novo `GeradorNumeroConta` a cada chamada. A correção preserva o comportamento esperado do padrão Singleton, embora a garantia de unicidade das contas também deva ser protegida por mecanismos apropriados no banco de dados.
+O método deve retornar a instância existente, em vez de criar um novo `GeradorNumeroConta` a cada chamada. A correção preserva o comportamento esperado do padrão Singleton. A unicidade dos números de conta também deve ser protegida por mecanismos apropriados no banco de dados.
 
 **Placar do grupo após esta decisão:** 🔥 9 · 💰 R$ 40 mil · 🧹 1
 
@@ -143,7 +142,7 @@ O método deve retornar a instância existente, em vez de criar um novo `Gerador
 
 **Justificativa:**
 
-A ordem dos parâmetros precisa corresponder ao contrato do método e ao significado de cada campo. Corrigir o registro das novas transferências evita que os comprovantes identifiquem incorretamente quem pagou e quem recebeu, embora os registros históricos incorretos continuem precisando de tratamento próprio.
+A ordem dos parâmetros precisa corresponder ao contrato do método e ao significado de cada campo. Corrigir o registro das novas transferências evita que os comprovantes identifiquem incorretamente quem pagou e quem recebeu. Os registros históricos incorretos ainda precisam de tratamento próprio.
 
 **Placar do grupo após esta decisão:** 🔥 10 · 💰 R$ 55 mil · 🧹 2
 
@@ -155,7 +154,7 @@ A ordem dos parâmetros precisa corresponder ao contrato do método e ao signifi
 
 **Justificativa:**
 
-Retornar `null` para um tipo de conta inválido transfere o problema para quem utiliza a fábrica e pode provocar erros posteriores. Uma exceção explícita torna a falha identificável e facilita o tratamento correto pelo código chamador, em vez de permitir que um objeto inválido passe despercebido.
+Retornar `null` para um tipo de conta inválido transfere o problema para quem utiliza a fábrica e pode provocar erros posteriores. Uma exceção explícita torna a falha identificável e facilita o tratamento correto pelo código chamador, evitando que um objeto inválido passe despercebido.
 
 **Placar do grupo após esta decisão:** 🔥 9 · 💰 R$ 55 mil · 🧹 2
 
@@ -213,6 +212,26 @@ O cálculo da taxa TED deve utilizar `TAXA_TED`, e o teste deve continuar valida
 
 **Placar do grupo após esta decisão:** 🔥 8 · 💰 R$ 85 mil · 🧹 0
 
+> **Evento Relâmpago E — A taxa é 5 ou 50? (05h58):** Não aplicável ao Grupo 23. Como o grupo escolheu a opção B na Rodada 6, investigou o problema da taxa TED e segue diretamente para a Rodada 7, conforme as regras do enunciado. Sem alteração no placar.
+
+## Rodada 7 — Go/No-Go da Black Friday (06h15)
+
+**Tipo:** rodada · **Voto:** B
+
+**Decisão:** Corrigir os problemas revelados durante a madrugada, garantir a suíte de testes verde e abrir a campanha às 10h, com duas horas de atraso.
+
+**Evidência:**
+
+Durante o review, a equipe identificou que o `TransferenciaService` concentra diversas regras importantes do sistema, incluindo saldo, taxa, extrato e geração de números de conta. A diretoria precisava decidir se a campanha da Black Friday seria liberada às 08h.
+
+**Justificativa:**
+
+O `TransferenciaService` concentra regras importantes do sistema, aumentando o risco de falhas quando sua implementação não é compreendida e testada integralmente. A equipe escolheu corrigir os problemas identificados e garantir que a suíte estivesse verde antes de liberar a aplicação. O trade-off é abrir a campanha às 10h, perdendo duas horas do pico inicial, em vez de priorizar a velocidade e expor os clientes a erros de negócio.
+
+**Placar do grupo após esta decisão:** 🔥 9 · 💰 R$ 185 mil · 🧹 −1
+
+> **Observação sobre a dívida técnica:** a consequência oficial da opção B reduz a dívida técnica em 1. Como o placar anterior era zero, o resultado matemático é −1. Confirmar com o professor se a atividade permite dívida técnica negativa ou se há um limite mínimo de zero.
+
 ---
 
 ## 🔎 O caminho do MEU grupo (preencher na 3ª aula, quando o mapa for revelado)
@@ -230,8 +249,9 @@ Uma linha por decisão registrada acima (usem os títulos ditados em aula):
 | 7 | O cadastro com metade dos campos | B | Builder com valores padrão e validação; sem alteração no placar |
 | 8 | O teste verde que não testa nada | A | Adiciona asserção ao teste; 🧹 −1 |
 | 9 | O teste vermelho às 03h45 | B | Corrige a taxa TED e perde a janela; 🔥 −1 · 💰 +30 mil · 🧹 −1 |
+| 10 | Go/No-Go da Black Friday | B | Corrige os problemas e abre às 10h; 🔥 +1 · 💰 +100 mil · 🧹 −1 |
 
-*(Adicionem linhas conforme as decisões da madrugada.)*
+*(O Evento Relâmpago E não é contabilizado como decisão do grupo, pois não se aplica à opção escolhida na Rodada 6.)*
 
 ---
 
