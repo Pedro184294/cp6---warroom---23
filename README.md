@@ -8,13 +8,9 @@
 > **Os incidentes da madrugada são revelados só em aula.** O título de cada registro
 > será **ditado pelo professor na hora**; ninguém se antecipe.
 
-**Grupo (nome da equipe plantonista):** Grupo 23
+**Grupo (nome da equipe plantonista):** ______________Grupo23________________________
 
-**Turma:** 2CCPG
-
-**Repo:** `cp6---warroom---23`
-
-**Link:** https://github.com/Pedro184294/cp6---warroom---23
+**Turma:** 2CCPG **Repo:** `cp6---warroom---23`
 
 **Integrantes (nome + RM):**
 
@@ -27,24 +23,19 @@
 | Nelson Troccoli Santos Neto | 562815 |
 | Raphael Talarico Nascimento Silva | 565219 |
 
----
-
 ## 0. Setup do repositório (antes da 1ª aula; podem apagar esta seção depois)
 
-1. Repositório público criado no GitHub: `cp6---warroom---23`.
-2. Arquivo `README.md` publicado no repositório.
-3. Commit inicial realizado com a mensagem `chore: ficha em branco do grupo`.
-4. Link do repositório para compartilhar no Teams:
+1. Repositório público criado no GitHub.
+2. O conteúdo do `README.md` foi organizado conforme a ficha de decisões do grupo.
+3. Repositório do grupo: https://github.com/Pedro184294/cp6---warroom---23
+4. Commit inicial previsto no modelo: `chore: ficha em branco do grupo`.
 
-   https://github.com/Pedro184294/cp6---warroom---23
-
-### Convenção de commits
-
-**Um commit por rodada; relâmpagos podem ir junto com a rodada seguinte.**
+**Convenção de commits** (1 commit por rodada; relâmpagos podem ir junto com a
+rodada seguinte):
 
 ```text
 decisao: R1 - opcao C (corrige saldo e adiciona teste)
-decisao: R2 - opcao A (resumo da justificativa em uma frase)
+decisao: R2 - opcao A (PreparedStatement com parametros vinculados)
 pos-mortem: relatorio de incidente da madrugada
 ```
 
@@ -76,42 +67,37 @@ segurança × faturamento × dívida). "Porque é mais seguro" não é justifica
 
 # 📝 REGISTRO DE DECISÕES
 
-> A cada incidente, o professor dita o título. Copiem o modelo abaixo e preencham
-> com o rascunho feito em aula, junto com o placar do grupo após a consequência.
-> Commitem 1 vez por rodada até 23h59 do dia.
+> A cada incidente, o professor dita o título (ex.: "Rodada 1"). **Copiem o modelo
+> abaixo, colem no fim desta seção** e preencham com o rascunho feito em aula, junto
+> com o **placar do grupo** após a consequência. Commitem 1 commit por rodada até
+> 23h59 do dia.
 >
 > **Eventos relâmpago:** registrem apenas se o grupo for **afetado** (o professor
 > chama quem for; não ser chamado é bom sinal).
 
-### RODADA 1 — O saldo que virou negativo (19h12)
+## O saldo que virou negativo
 
 **Tipo:** rodada · **Voto:** C
 
 **Justificativa:**
 
-Escolhemos corrigir a validação de saldo e escrever um teste automatizado com `assertThrows` antes de subir a correção. O teste deve garantir que transferências sem saldo suficiente sejam rejeitadas, impedindo que o débito continue após a exceção. A solução consome cerca de 40 minutos, mas melhora a confiabilidade e reduz a dívida técnica.
+Escolhemos corrigir a validação do saldo e adicionar um teste com `assertThrows` para garantir que uma transferência sem saldo suficiente seja recusada. A solução exige tempo para corrigir e testar, mas aumenta a confiabilidade do sistema e reduz a dívida técnica, evitando que o saldo fique negativo.
+
+**Placar do grupo após esta decisão:** 🔥 8 · 💰 R$ 35 mil · 🧹 1
+
+## A injeção que derreteu o banco
+
+**Tipo:** rodada · **Voto:** A
+
+**Justificativa:**
+
+Escolhemos utilizar `PreparedStatement` com parâmetros vinculados para impedir que os dados informados pelo usuário sejam interpretados como parte do comando SQL. Essa solução corrige a vulnerabilidade de SQL Injection e mantém a funcionalidade de busca disponível, priorizando a segurança sem precisar remover o endpoint.
 
 **Placar do grupo após esta decisão:** 🔥 8 · 💰 R$ 35 mil · 🧹 1
 
 ---
 
-### Próximas decisões
-
-> Preencher somente quando os incidentes forem apresentados pelo professor e o grupo tiver tomado sua decisão. Para cada registro, usem o modelo abaixo.
-
-```markdown
-## <título ditado pelo professor>
-
-**Tipo:** ( rodada / relâmpago ) · **Voto:** ( A / B / C / D )
-
-**Justificativa:**
-
-<2 a 3 linhas: mecanismo técnico + trade-off>
-
-**Placar do grupo após esta decisão:** 🔥 __ · 💰 R$ __ mil · 🧹 __
-```
-
----
+*(As decisões seguintes devem ser adicionadas aqui, na ordem em que os incidentes forem apresentados em aula. Placar inicial: 🔥 7 · 💰 0 · 🧹 2.)*
 
 ## 🔎 O caminho do MEU grupo (preencher na 3ª aula, quando o mapa for revelado)
 
@@ -119,18 +105,17 @@ Uma linha por decisão registrada acima (usem os títulos ditados em aula):
 
 | # | Decisão | Nossa letra | Consequência que ELA teria tido |
 |---|---|---|---|
-| 1 | R1 — O saldo que virou negativo | C | Corrigir a validação do saldo e adicionar teste; +1 reputação, +R$ 35 mil de prejuízo e -1 dívida técnica. |
-| | | | |
-| | | | |
+| 1 | O saldo que virou negativo | C | Corrigir a validação do saldo e adicionar teste; reputação +1, prejuízo +R$ 35 mil e dívida técnica −1. |
+| 2 | A injeção que derreteu o banco | A | Usar `PreparedStatement` com parâmetros vinculados; sem alteração no placar. |
 | | | | |
 
-*(adicionem linhas conforme as decisões da madrugada)*
+*(Adicionem linhas conforme as decisões da madrugada.)*
 
 ---
 
 # 📋 PÓS-MORTEM · relatório de incidente (montar em sala na 3ª aula)
 
-> Rascunho em aula e commit final `pos-mortem: relatorio de incidente da madrugada` até 23h59 do dia da 3ª aula.
+> Rascunho em aula e commit final `pos-mortem:` até 23h59 do dia da 3ª aula.
 
 ## 1. Linha do tempo da madrugada
 
@@ -144,13 +129,13 @@ ________________________________________________________________________________
 
 **Incidente 1:** _______________________________________________
 
-**Aula/mecanismo:**
+Aula/mecanismo:
 
 _______________________________________________________________________________________
 
 **Incidente 2:** _______________________________________________
 
-**Aula/mecanismo:**
+Aula/mecanismo:
 
 _______________________________________________________________________________________
 
