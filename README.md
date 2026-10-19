@@ -8,7 +8,7 @@
 > **Os incidentes da madrugada são revelados só em aula.** O título de cada registro
 > será **ditado pelo professor na hora**; ninguém se antecipe.
 
-**Grupo (nome da equipe plantonista):** ______________________________________
+**Grupo (nome da equipe plantonista):** _____________Grupo 23_________________________
 
 **Turma:** 2CCPG **Repo:** `cp6---warroom---23`
 
@@ -37,6 +37,7 @@ decisao: R1 - opcao C (corrige saldo e adiciona teste)
 decisao: R2 - opcao A (PreparedStatement com parametros vinculados)
 decisao: R3 - opcao A (corrige Singleton do gerador de contas)
 decisao: R4 - opcao A (corrige novos extratos)
+decisao: R5 - opcao A (excecao para tipo de conta invalido)
 pos-mortem: relatorio de incidente da madrugada
 ```
 
@@ -126,6 +127,16 @@ Escolhemos corrigir a gravação dos novos extratos para registrar corretamente 
 
 **Placar do grupo após esta decisão:** 🔥 10 · 💰 R$ 55 mil · 🧹 2
 
+## A fábrica que devolveu null
+
+**Tipo:** rodada · **Voto:** A
+
+**Justificativa:**
+
+Escolhemos aplicar a estratégia fail-fast na `ContaFactory`, lançando uma exceção clara quando o tipo de conta informado não for reconhecido, em vez de devolver `null`. Assim, o erro é identificado na origem, evitando falhas posteriores ao utilizar um objeto nulo. A decisão reduz o risco de comportamento inesperado sem aumentar a dívida técnica, embora tenha impacto de reputação conforme a tabela do incidente.
+
+**Placar do grupo após esta decisão:** 🔥 9 · 💰 R$ 55 mil · 🧹 2
+
 ---
 
 ## 🔎 O caminho do MEU grupo (preencher na 3ª aula, quando o mapa for revelado)
@@ -139,6 +150,7 @@ Uma linha por decisão registrada acima (usem os títulos ditados em aula):
 | 3 | As conexões se fecham | A | Corrigir o vazamento com `try-with-resources`; sem alteração no placar. |
 | 4 | A noite das contas gêmeas | A | Corrigir o Singleton; reputação +1, prejuízo +R$ 5 mil e dívida técnica sem alteração. |
 | 5 | O comprovante que aponta pra pessoa errada | A | Corrigir os novos extratos; reputação +1, prejuízo +R$ 15 mil e dívida técnica +1. |
+| 6 | A fábrica que devolveu null | A | Lançar exceção para tipo inválido; reputação −1, sem alteração no prejuízo e na dívida técnica. |
 
 *(Adicionem linhas conforme as decisões da madrugada. Completem as consequências finais quando o mapa for revelado.)*
 
