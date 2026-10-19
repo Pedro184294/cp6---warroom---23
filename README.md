@@ -1,23 +1,20 @@
 # FICHA DE DECISÕES · War Room FiapBank (CP6 · 3 aulas)
 
-> Este arquivo é o **README.md do repositório do grupo** (`cp6-warroom-<nome-do-grupo>`).
-> Vale **5,0 pontos** (rodadas 0,5 · relâmpagos 0,3), e a nota é pela
-> **justificativa**, não pela letra. Preencham após cada aula e commitem até
-> **23h59 do mesmo dia** (regras completas na seção 5 do enunciado).
+> Este arquivo é o **README.md do repositório do grupo**.
 >
-> **Os incidentes da madrugada são revelados só em aula.** O título de cada registro
-> será **ditado pelo professor na hora**; ninguém se antecipe.
+> Registro das decisões tomadas durante a dinâmica, suas justificativas técnicas, os impactos na pontuação e o perfil final da noite.
+>
+> **Grupo:** 23 · **Turma:** 2CCPG
 
 **Grupo (nome da equipe plantonista):** Grupo 23
 
-**Turma:** 2CCPG 
-
-**Repo:** `cp6---warroom---23`
+**Turma:** 2CCPG  
+**Repo:** [`cp6---warroom---23`](https://github.com/Pedro184294/cp6---warroom---23)
 
 **Integrantes (nome + RM):**
 
 | Nome | RM |
-|---|---|
+|---|---:|
 | Pedro Luis Tofoli | 564441 |
 | Fabricio Cardoso de Oliveira | 561827 |
 | Vinicius Barbosa Gomes | 564854 |
@@ -25,268 +22,362 @@
 | Nelson Troccoli Santos Neto | 562815 |
 | Raphael Talarico Nascimento Silva | 565219 |
 
-## 0. Setup do repositório (antes da 1ª aula; podem apagar esta seção depois)
+---
 
-1. Um integrante cria o repo **público** no GitHub: `cp6-warroom-<nome-do-grupo>`
-   (ex.: `cp6-warroom-debugadores`), com um README qualquer.
-2. Substituam o conteúdo do `README.md` por esta ficha, no navegador, pelo próprio
-   GitHub, ou clonando o repositório:
+## 0. Setup do repositório
 
-   ```bash
-   git clone https://github.com/Pedro184294/cp6---warroom---23.git
-   cd cp6---warroom---23
-   git add README.md
-   git commit -m "docs: atualiza ficha de decisoes do grupo"
-   git push
-   ```
+O repositório público do grupo foi criado para registrar as decisões tomadas durante a dinâmica War Room FiapBank.
 
-3. Postem o **link no Teams** (o mesmo link para todo o grupo).
+**Link do repositório:** https://github.com/Pedro184294/cp6---warroom---23
 
-**Convenção de commits** (1 commit por rodada; relâmpagos podem ir junto com a
-rodada seguinte):
+**Convenção de commits:**
 
-```text
-decisao: R1 - opcao C - corrige validacao de saldo
-decisao: R2 - opcao A - parametriza consultas SQL
-pos-mortem: relatorio de incidente da madrugada
+```bash
+git add README.md
+git commit -m "epilogo: placar final e perfil da noite"
+git push
 ```
 
 ---
 
 ## 📁 Dossiê técnico do FiapBank (MVP em produção)
 
-**Stack:** Java 17 + Spring Boot + Spring Data JPA + Oracle. API com endpoints em
-`/api/contas` e `/api/transferencias` (cenário visto desde a Aula 13).
+**Stack:** Java 17 + Spring Boot + Spring Data JPA + Oracle. API com endpoints em `/api/contas` e `/api/transferencias`.
 
 **Contrato e regras de negócio que o banco prometeu aos clientes e aos reguladores:**
 
 | Regra | Como deve ser |
 |---|---|
-| Transferência **PIX** | taxa **R$ 0,00** |
-| Transferência **TED** | taxa fixa **R$ 5,00** |
-| Saldo | **nunca fica negativo**: transferência/saque sem saldo é recusado com erro claro |
-| Número de conta | **sequencial e único** (1001, 1002, 1003...), gerado pelo sistema |
-| Extrato de transferência | grava **quem pagou** e **quem recebeu**, na ordem certa |
-| CPF | **dado sensível**: nunca aparece nas respostas da API |
-| Consultas ao banco | sempre parametrizadas, e cada operação **usa e libera** a conexão |
-| Suíte de testes | roda antes de todo deploy; **verde** é pré-requisito pra subir |
+| Transferência **PIX** | Taxa **R$ 0,00** |
+| Transferência **TED** | Taxa fixa **R$ 5,00** |
+| Saldo | **Nunca fica negativo**: transferência ou saque sem saldo é recusado com erro claro |
+| Número de conta | **Sequencial e único** (1001, 1002, 1003...), gerado pelo sistema |
+| Extrato de transferência | Registra **quem pagou** e **quem recebeu**, na ordem certa |
+| CPF | **Dado sensível**: nunca aparece nas respostas da API |
+| Consultas ao banco | Sempre parametrizadas, com os recursos utilizados liberados corretamente |
+| Suíte de testes | Executada antes de todo deploy; **verde** é pré-requisito para subir |
 
-**Como escrever a justificativa:** nomeie o **mecanismo técnico** em jogo (o
-conceito das Aulas 11 a 15 que explica o incidente) e o **trade-off** (velocidade ×
-segurança × faturamento × dívida). "Porque é mais seguro" não é justificativa.
+**Como escrever a justificativa:** nomear o mecanismo técnico envolvido e explicar o trade-off entre velocidade, segurança, faturamento e dívida técnica.
 
 ---
 
 # 📝 REGISTRO DE DECISÕES
 
-> A cada incidente, o professor dita o título. Registrem a opção escolhida, a justificativa
-> técnica e o placar após a consequência. Commitem 1 commit por rodada até 23h59 do dia.
->
-> **Eventos relâmpago:** registrem apenas se o grupo for afetado pelas regras do evento.
+> As decisões abaixo registram as escolhas feitas pelo grupo durante a dinâmica, incluindo o placar após cada consequência.
 
-*(Placar inicial: 🔥 7 · 💰 R$ 0 mil · 🧹 2)*
+**Placar inicial:** 🔥 7 · 💰 R$ 0 mil · 🧹 2
 
-## Rodada 1 — O saldo que virou negativo
+---
 
-**Tipo:** rodada · **Voto:** C
+## R1 — O saldo que virou negativo
 
-**Decisão:** Corrigir a validação de saldo e adicionar um teste com `assertThrows`.
+**Tipo:** Rodada · **Voto:** C
 
 **Justificativa:**
 
-A validação deve impedir que uma transferência deixe a conta com saldo negativo. O teste com `assertThrows` verifica se a operação sem saldo suficiente é recusada, protegendo a regra de negócio sem depender apenas de verificações manuais.
+O grupo escolheu corrigir a validação do saldo e adicionar um teste para impedir operações que deixem a conta negativa. A decisão prioriza a integridade financeira e a confiabilidade do sistema, reduzindo o risco de inconsistências nas operações bancárias.
 
 **Placar do grupo após esta decisão:** 🔥 8 · 💰 R$ 35 mil · 🧹 1
 
-## Rodada 2 — A injeção que derreteu o banco
+| Indicador | Alteração |
+|---|---:|
+| 🔥 Saúde do banco | +1 |
+| 💰 Receita | +R$ 35 mil |
+| 🧹 Dívida técnica | -1 |
 
-**Tipo:** rodada · **Voto:** A
+---
 
-**Decisão:** Utilizar `PreparedStatement` com parâmetros vinculados.
+## R2 — A injeção que derreteu o banco
+
+**Tipo:** Rodada · **Voto:** A
 
 **Justificativa:**
 
-O uso de `PreparedStatement` com parâmetros vinculados evita a concatenação direta de valores na consulta SQL e reduz o risco de SQL Injection. A escolha prioriza a segurança das consultas sem abandonar a funcionalidade do sistema.
+O grupo escolheu utilizar `PreparedStatement` com parâmetros vinculados para evitar a concatenação direta de entradas nas consultas SQL. A decisão prioriza a segurança e reduz o risco de SQL Injection.
 
 **Placar do grupo após esta decisão:** 🔥 8 · 💰 R$ 35 mil · 🧹 1
 
-## Relâmpago B — As conexões se fecham
+| Indicador | Alteração |
+|---|---:|
+| 🔥 Saúde do banco | 0 |
+| 💰 Receita | R$ 0 mil |
+| 🧹 Dívida técnica | 0 |
 
-**Tipo:** relâmpago · **Voto:** A
+---
 
-**Decisão:** Utilizar `try-with-resources` para liberar os recursos JDBC corretamente.
+## Flash A — A busca que não acha ninguém
+
+**Tipo:** Relâmpago · **Situação:** Não aplicável
+
+O evento era destinado aos grupos que escolheram a opção D na R1. Como o grupo escolheu a opção C, este Flash não foi contabilizado como decisão do grupo.
+
+---
+
+## Flash B — As conexões se fecham
+
+**Tipo:** Relâmpago · **Voto:** A
 
 **Justificativa:**
 
-O `try-with-resources` garante o fechamento automático de recursos, como conexões, statements e result sets, mesmo quando ocorre uma exceção. A solução corrige a causa do vazamento, em vez de apenas aumentar o pool de conexões e mascarar o problema.
+O grupo escolheu utilizar `try-with-resources` para garantir o fechamento automático dos recursos JDBC. Essa abordagem reduz o risco de vazamento de conexões e melhora a organização do acesso ao banco de dados.
 
 **Placar do grupo após esta decisão:** 🔥 8 · 💰 R$ 35 mil · 🧹 1
 
-## Rodada 3 — A noite das contas gêmeas
+| Indicador | Alteração |
+|---|---:|
+| 🔥 Saúde do banco | 0 |
+| 💰 Receita | R$ 0 mil |
+| 🧹 Dívida técnica | 0 |
 
-**Tipo:** rodada · **Voto:** A
+---
 
-**Decisão:** Corrigir o método `getInstancia()` para reutilizar a instância do Singleton.
+## R3 — A noite das contas gêmeas
+
+**Tipo:** Rodada · **Voto:** A
 
 **Justificativa:**
 
-O método deve retornar a instância existente, em vez de criar um novo `GeradorNumeroConta` a cada chamada. A correção preserva o comportamento esperado do padrão Singleton. A unicidade dos números de conta também deve ser protegida por mecanismos apropriados no banco de dados.
+O grupo escolheu corrigir o Singleton do gerador de números de conta. O método `getInstancia()` deveria retornar a mesma instância, mas criava uma nova a cada chamada. A correção busca garantir o comportamento esperado do gerador e reduzir o risco de duplicidade de números de conta.
 
 **Placar do grupo após esta decisão:** 🔥 9 · 💰 R$ 40 mil · 🧹 1
 
-## Rodada 4 — O comprovante que aponta pra pessoa errada
+| Indicador | Alteração |
+|---|---:|
+| 🔥 Saúde do banco | +1 |
+| 💰 Receita | +R$ 5 mil |
+| 🧹 Dívida técnica | 0 |
 
-**Tipo:** rodada · **Voto:** A
+---
 
-**Decisão:** Corrigir a ordem dos parâmetros de pagador e recebedor nas novas transferências.
+## R4 — O comprovante que aponta pra pessoa errada
+
+**Tipo:** Rodada · **Voto:** A
 
 **Justificativa:**
 
-A ordem dos parâmetros precisa corresponder ao contrato do método e ao significado de cada campo. Corrigir o registro das novas transferências evita que os comprovantes identifiquem incorretamente quem pagou e quem recebeu. Os registros históricos incorretos ainda precisam de tratamento próprio.
+O grupo escolheu corrigir a ordem dos parâmetros utilizados no registro das transferências, garantindo que o pagador e o recebedor sejam identificados corretamente nas novas operações. Os registros históricos incorretos permanecem sem correção nessa alternativa.
 
 **Placar do grupo após esta decisão:** 🔥 10 · 💰 R$ 55 mil · 🧹 2
 
-## Rodada 5 — A fábrica que devolveu null
+| Indicador | Alteração |
+|---|---:|
+| 🔥 Saúde do banco | +1 |
+| 💰 Receita | +R$ 15 mil |
+| 🧹 Dívida técnica | +1 |
 
-**Tipo:** rodada · **Voto:** A
+---
 
-**Decisão:** Lançar uma exceção quando o tipo de conta informado for inválido.
+## R5 — A fábrica que devolveu null
+
+**Tipo:** Rodada · **Voto:** A
 
 **Justificativa:**
 
-Retornar `null` para um tipo de conta inválido transfere o problema para quem utiliza a fábrica e pode provocar erros posteriores. Uma exceção explícita torna a falha identificável e facilita o tratamento correto pelo código chamador, evitando que um objeto inválido passe despercebido.
+O grupo escolheu lançar uma exceção quando o tipo de conta informado for inválido, em vez de retornar `null`. Essa abordagem deixa o erro explícito e facilita o tratamento de situações inválidas, reduzindo o risco de falhas posteriores.
 
 **Placar do grupo após esta decisão:** 🔥 9 · 💰 R$ 55 mil · 🧹 2
 
-## Relâmpago C — O cadastro com metade dos campos
+| Indicador | Alteração |
+|---|---:|
+| 🔥 Saúde do banco | -1 |
+| 💰 Receita | R$ 0 mil |
+| 🧹 Dívida técnica | 0 |
 
-**Tipo:** relâmpago · **Voto:** B
+---
 
-**Decisão:** Utilizar o padrão Builder com valores padrão e validação no método `build()`.
+## Flash C — O cadastro com metade dos campos
+
+**Tipo:** Relâmpago · **Voto:** B
 
 **Justificativa:**
 
-O Builder permite montar objetos com vários campos de maneira mais legível e centralizar as validações antes da criação do objeto. Essa abordagem reduz a necessidade de múltiplos construtores e evita que instâncias incompletas sejam criadas silenciosamente.
+O grupo escolheu utilizar o padrão Builder, com valores padrão e validação no método `build()`. A abordagem organiza a construção de objetos com vários atributos e ajuda a impedir que objetos incompletos ou inválidos sejam criados.
 
 **Placar do grupo após esta decisão:** 🔥 9 · 💰 R$ 55 mil · 🧹 2
 
-## Relâmpago D — O teste verde que não testa nada
+| Indicador | Alteração |
+|---|---:|
+| 🔥 Saúde do banco | 0 |
+| 💰 Receita | R$ 0 mil |
+| 🧹 Dívida técnica | 0 |
 
-**Tipo:** relâmpago · **Voto:** A
+---
 
-**Decisão:** Adicionar a asserção ausente para que o teste valide efetivamente o comportamento esperado.
+## Flash D — O teste verde que não testa nada
+
+**Tipo:** Relâmpago · **Voto:** A
 
 **Justificativa:**
 
-Um teste sem uma asserção adequada pode terminar sem detectar uma regressão, produzindo uma falsa sensação de segurança. Adicionar `assertEquals` ou `assertThrows`, conforme o cenário, faz com que a suíte verifique o resultado esperado em vez de apenas executar o código.
+O grupo escolheu adicionar uma asserção para verificar o comportamento esperado do teste, como `assertEquals` ou `assertThrows`. Um teste precisa validar efetivamente o resultado ou a exceção esperada, e não apenas executar o código sem verificar o comportamento.
 
 **Placar do grupo após esta decisão:** 🔥 9 · 💰 R$ 55 mil · 🧹 1
 
-## Rodada 6 — O teste vermelho às 03h45
+| Indicador | Alteração |
+|---|---:|
+| 🔥 Saúde do banco | 0 |
+| 💰 Receita | R$ 0 mil |
+| 🧹 Dívida técnica | -1 |
 
-**Tipo:** rodada · **Voto:** B
+---
 
-**Decisão:** Investigar e corrigir a taxa de TED, mesmo perdendo a janela de deploy.
+## R6 — O teste vermelho às 03h45
 
-**Evidência:**
-
-```text
-[ERROR] Tests run: 13, Failures: 1
-[ERROR] TransferenciaServiceTest.tedDeveCobrarTaxaDe5Reais:
-        expected: <5.0> but was: <50.0>
-```
+**Tipo:** Rodada · **Voto:** B
 
 **Justificativa:**
 
-O contrato de negócio estabelece que a taxa TED deve ser R$ 5,00, enquanto o serviço está retornando R$ 50,00. O teste vermelho identifica uma divergência real entre a implementação e o contrato. A equipe escolheu investigar o problema e corrigir o código, em vez de desativar o teste, alterar a expectativa ou realizar o deploy com a suíte falhando. O trade-off é perder a janela de deploy e adiar a publicação das correções, priorizando a integridade da cobrança e a confiabilidade da aplicação.
+O grupo escolheu investigar e corrigir a divergência na tarifa TED, que deveria ser de R$ 5,00, mas estava retornando R$ 50,00. A decisão prioriza o cumprimento do contrato de negócio e a confiabilidade dos testes, em vez de desativar testes ou liberar uma versão com a suíte vermelha.
 
-**Correção esperada:**
-
-Substituir o valor incorreto por uma constante que represente a taxa definida no contrato e manter o teste verificando R$ 5,00.
-
-```java
-private static final double TAXA_TED = 5.00;
-```
-
-O cálculo da taxa TED deve utilizar `TAXA_TED`, e o teste deve continuar validando o valor contratual. A correção deve ser seguida da execução da suíte de testes antes do próximo deploy.
+A correção esperada é ajustar a implementação da tarifa e executar novamente a suíte completa antes da liberação.
 
 **Placar do grupo após esta decisão:** 🔥 8 · 💰 R$ 85 mil · 🧹 0
 
-> **Evento Relâmpago E — A taxa é 5 ou 50? (05h58):** Não aplicável ao Grupo 23. Como o grupo escolheu a opção B na Rodada 6, investigou o problema da taxa TED e segue diretamente para a Rodada 7, conforme as regras do enunciado. Sem alteração no placar.
+| Indicador | Alteração |
+|---|---:|
+| 🔥 Saúde do banco | -1 |
+| 💰 Receita | +R$ 30 mil |
+| 🧹 Dívida técnica | -1 |
 
-## Rodada 7 — Go/No-Go da Black Friday (06h15)
+---
 
-**Tipo:** rodada · **Voto:** B
+## Flash E — A taxa é 5 ou 50? (05h58)
 
-**Decisão:** Corrigir os problemas revelados durante a madrugada, garantir a suíte de testes verde e abrir a campanha às 10h, com duas horas de atraso.
+**Tipo:** Relâmpago · **Situação:** Não aplicável
 
-**Evidência:**
+Este Flash era destinado aos grupos que escolheram A, C ou D na R6 e permaneceram com a suíte de testes comprometida. Como o grupo escolheu a opção B na R6, o evento não foi contabilizado como decisão do grupo.
 
-Durante o review, a equipe identificou que o `TransferenciaService` concentra diversas regras importantes do sistema, incluindo saldo, taxa, extrato e geração de números de conta. A diretoria precisava decidir se a campanha da Black Friday seria liberada às 08h.
+---
+
+## R7 — Go/No-Go da Black Friday (06h15)
+
+**Tipo:** Rodada · **Voto:** B
 
 **Justificativa:**
 
-O `TransferenciaService` concentra regras importantes do sistema, aumentando o risco de falhas quando sua implementação não é compreendida e testada integralmente. A equipe escolheu corrigir os problemas identificados e garantir que a suíte estivesse verde antes de liberar a aplicação. O trade-off é abrir a campanha às 10h, perdendo duas horas do pico inicial, em vez de priorizar a velocidade e expor os clientes a erros de negócio.
+O grupo escolheu corrigir os problemas identificados durante a noite e garantir que a suíte de testes estivesse realmente verde antes da abertura do banco. A decisão aceita um atraso de duas horas, com abertura prevista para as 10h, para priorizar a estabilidade do sistema, a integridade das operações e a confiança dos clientes.
 
-**Placar do grupo após esta decisão:** 🔥 9 · 💰 R$ 185 mil · 🧹 −1
+**Placar do grupo após esta decisão:** 🔥 9 · 💰 R$ 185 mil · 🧹 -1
 
-> **Observação sobre a dívida técnica:** a consequência oficial da opção B reduz a dívida técnica em 1. Como o placar anterior era zero, o resultado matemático é −1. Confirmar com o professor se a atividade permite dívida técnica negativa ou se há um limite mínimo de zero.
+| Indicador | Alteração |
+|---|---:|
+| 🔥 Saúde do banco | +1 |
+| 💰 Receita | +R$ 100 mil |
+| 🧹 Dívida técnica | -1 |
 
----
-
-## 🔎 O caminho do MEU grupo (preencher na 3ª aula, quando o mapa for revelado)
-
-Uma linha por decisão registrada acima (usem os títulos ditados em aula):
-
-| # | Decisão | Nossa letra | Consequência que ELA teria tido |
-|---|---|---|---|
-| 1 | O saldo que virou negativo | C | Corrige a validação de saldo e adiciona teste; 🔥 +1 · 💰 +35 mil · 🧹 −1 |
-| 2 | A injeção que derreteu o banco | A | Parametriza consultas SQL; sem alteração no placar |
-| 3 | As conexões se fecham | A | Corrige o vazamento de recursos JDBC; sem alteração no placar |
-| 4 | A noite das contas gêmeas | A | Corrige o retorno do Singleton; 🔥 +1 · 💰 +5 mil |
-| 5 | O comprovante que aponta pra pessoa errada | A | Corrige a ordem dos dados nas novas transferências; 🔥 +1 · 💰 +15 mil · 🧹 +1 |
-| 6 | A fábrica que devolveu null | A | Falha explícita para tipo inválido; 🔥 −1 |
-| 7 | O cadastro com metade dos campos | B | Builder com valores padrão e validação; sem alteração no placar |
-| 8 | O teste verde que não testa nada | A | Adiciona asserção ao teste; 🧹 −1 |
-| 9 | O teste vermelho às 03h45 | B | Corrige a taxa TED e perde a janela; 🔥 −1 · 💰 +30 mil · 🧹 −1 |
-| 10 | Go/No-Go da Black Friday | B | Corrige os problemas e abre às 10h; 🔥 +1 · 💰 +100 mil · 🧹 −1 |
-
-*(O Evento Relâmpago E não é contabilizado como decisão do grupo, pois não se aplica à opção escolhida na Rodada 6.)*
+> **Observação:** a dívida técnica foi calculada literalmente com os efeitos informados nas decisões. O material fornecido não esclarece se esse indicador pode assumir valor negativo; confirmar com o professor.
 
 ---
 
-# 📋 PÓS-MORTEM · relatório de incidente (montar em sala na 3ª aula)
+## 🔎 O caminho do MEU grupo
+
+Uma linha por decisão registrada, na ordem em que os eventos ocorreram.
+
+| # | Decisão | Nossa letra | Consequência que ela teria tido |
+|---:|---|:---:|---|
+| 1 | R1 — O saldo que virou negativo | C | Correção da validação de saldo e inclusão de teste |
+| 2 | R2 — A injeção que derreteu o banco | A | Consultas parametrizadas com `PreparedStatement` |
+| 3 | Flash B — As conexões se fecham | A | Fechamento automático de recursos JDBC |
+| 4 | R3 — A noite das contas gêmeas | A | Correção do Singleton do gerador de contas |
+| 5 | R4 — O comprovante que aponta pra pessoa errada | A | Registro correto de pagador e recebedor |
+| 6 | R5 — A fábrica que devolveu null | A | Exceção para tipo de conta inválido |
+| 7 | Flash C — O cadastro com metade dos campos | B | Builder com valores padrão e validação |
+| 8 | Flash D — O teste verde que não testa nada | A | Inclusão de asserção para validar o teste |
+| 9 | R6 — O teste vermelho às 03h45 | B | Correção da tarifa TED antes da liberação |
+| 10 | R7 — Go/No-Go da Black Friday | B | Correção dos problemas antes da abertura |
+
+**Eventos não aplicáveis:** Flash A e Flash E, conforme as condições de cada evento.
+
+---
+
+# 🏁 EPÍLOGO · AMANHECE A BLACK FRIDAY (07h00)
+
+> O placar final foi congelado conforme os efeitos das decisões registradas pelo grupo. Os perfis representam a situação da equipe ao final da noite, não uma premiação.
+
+## Placar final congelado
+
+| Indicador | Resultado final |
+|---|---:|
+| 🔥 Saúde do banco | 9 |
+| 💰 Receita | R$ 185 mil |
+| 🧹 Dívida técnica | -1 |
+
+## Perfil da noite do grupo
+
+### A Noite dos Heróis
+
+**Critério:** 🔥 7 ou mais e 🧹 até 2.
+
+**Como amanhece o banco:** banco abriu, clientes confiam, time dorme (quase) em paz.
+
+**Justificativa do enquadramento:** o grupo terminou com saúde do banco igual a 9 e dívida técnica calculada em -1. Esses valores atendem aos critérios apresentados para o perfil A Noite dos Heróis.
+
+## Perfis adicionais
+
+| Perfil | Critério | Resultado do grupo |
+|---|---|---|
+| O Preço da Pressa | 💰 400 ou mais | Não se aplica: receita de R$ 185 mil |
+| Firefighters Crônicos | 🧹 6 ou mais | Não se aplica: dívida técnica calculada em -1 |
+
+### Conclusão do epílogo
+
+O grupo priorizou a integridade financeira, a segurança das consultas, o registro correto das transferências e a validação do sistema por testes. Na decisão final, escolheu corrigir os problemas antes da abertura, aceitando o atraso de duas horas para evitar uma liberação sem a validação necessária.
+
+**Ponto pendente:** confirmar com o professor se a dívida técnica pode assumir valor negativo. Até essa confirmação, o valor permanece registrado conforme o cálculo literal dos efeitos das decisões.
+
+---
+
+# 📋 PÓS-MORTEM · relatório de incidente
 
 > Rascunho em aula e commit final `pos-mortem:` até 23h59 do dia da 3ª aula.
 
 ## 1. Linha do tempo da madrugada
 
-_______________________________________________________________________________________
+| Horário | Incidente | Decisão tomada | Consequência observada |
+|---|---|---|---|
+| A preencher em sala | A preencher | A preencher | A preencher |
+| A preencher em sala | A preencher | A preencher | A preencher |
+| A preencher em sala | A preencher | A preencher | A preencher |
 
-_______________________________________________________________________________________
-
-_______________________________________________________________________________________
-
-## 2. Causa raiz de 2 incidentes (aula + mecanismo técnico)
+## 2. Causa-raiz de 2 incidentes (aula + mecanismo técnico)
 
 **Incidente 1:** _______________________________________________
 
-Aula/mecanismo:
+**Aula/mecanismo:**
 
-_______________________________________________________________________________________
+A preencher em sala com base no incidente apresentado pelo professor.
+
+**Causa-raiz:** a preencher.
+
+**Correção ou decisão tomada:** a preencher.
 
 **Incidente 2:** _______________________________________________
 
-Aula/mecanismo:
+**Aula/mecanismo:**
 
-_______________________________________________________________________________________
+A preencher em sala com base no incidente apresentado pelo professor.
+
+**Causa-raiz:** a preencher.
+
+**Correção ou decisão tomada:** a preencher.
 
 ## 3. O que faríamos diferente (2 rodadas + por quê)
 
-_______________________________________________________________________________________
+**Decisão 1:** a preencher.
 
-_______________________________________________________________________________________
+**O que mudaríamos e por quê:**
+
+A preencher em sala, considerando o mecanismo técnico e o trade-off envolvido.
+
+**Decisão 2:** a preencher.
+
+**O que mudaríamos e por quê:**
+
+A preencher em sala, considerando o mecanismo técnico e o trade-off envolvido.
 
 ## 4. A maior lição da equipe
 
-_______________________________________________________________________________________
+A preencher após a discussão em sala.
+
+A reflexão deverá considerar o que a equipe aprendeu sobre segurança, integridade financeira, testes, dívida técnica, pressão de tempo e tomada de decisões em produção.
+
