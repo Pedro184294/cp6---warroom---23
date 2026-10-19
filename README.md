@@ -10,7 +10,9 @@
 
 **Grupo (nome da equipe plantonista):** Grupo 23
 
-**Turma:** 2CCPG **Repo:** [`cp6-warroom-23`](https://github.com/Pedro184294/cp6---warroom---23)
+**Turma:** 2CCPG 
+
+**Repo:** [`cp6---warroom---23`](https://github.com/Pedro184294/cp6---warroom---23)
 
 **Integrantes (nome + RM):**
 
@@ -26,8 +28,8 @@
 ## 0. Setup do repositório (antes da 1ª aula; podem apagar esta seção depois)
 
 1. O repositório do grupo deve ser **público** no GitHub.
-2. O `README.md` deve conter a ficha de decisões atualizada.
-3. O histórico deve registrar as decisões com commits separados, seguindo a convenção definida pelo professor.
+2. Substituam o conteúdo do `README.md` pela ficha preenchida.
+3. Registrem as decisões com commits separados, seguindo a convenção definida pelo professor.
 4. Postem o **link no Teams** (o mesmo link para todo o grupo).
 
 **Convenção de commits** (1 commit por rodada; relâmpagos podem ir junto com a rodada seguinte):
@@ -38,7 +40,9 @@ decisao: R2 - opcao A (PreparedStatement com parametros vinculados)
 decisao: R3 - opcao A (corrige Singleton do gerador de contas)
 decisao: R4 - opcao A (corrige novos extratos)
 decisao: R5 - opcao A (excecao para tipo de conta invalido)
+decisao: Evento Relampago B - opcao A (fecha recursos JDBC)
 decisao: Evento Relampago C - opcao B (Builder com valores padrao)
+decisao: Evento Relampago D - opcao A (adiciona assert ao teste)
 pos-mortem: relatorio de incidente da madrugada
 ```
 
@@ -95,7 +99,7 @@ Escolhemos corrigir a validação do saldo e adicionar um teste com `assertThrow
 
 **Justificativa:**
 
-Escolhemos utilizar `PreparedStatement` com parâmetros vinculados para evitar que dados informados pelo usuário sejam interpretados como parte do comando SQL. Essa abordagem reduz o risco de SQL Injection e prioriza a segurança e a integridade dos dados, em vez de manter uma implementação vulnerável por conveniência.
+Escolhemos utilizar `PreparedStatement` com parâmetros vinculados para evitar que dados informados pelo usuário sejam interpretados como parte do comando SQL. Essa abordagem reduz o risco de SQL Injection e protege a integridade dos dados, priorizando a segurança em vez de manter uma implementação vulnerável por conveniência.
 
 **Placar do grupo após esta decisão:** 🔥 8 · 💰 R$ 35 mil · 🧹 1
 
@@ -107,7 +111,7 @@ Escolhemos utilizar `PreparedStatement` com parâmetros vinculados para evitar q
 
 **Justificativa:**
 
-Escolhemos utilizar `try-with-resources` para garantir o fechamento automático dos recursos JDBC ao final da operação, inclusive quando ocorre uma exceção. Embora a correção exija alterar o código, ela resolve a causa do vazamento de conexões, enquanto apenas aumentar o tamanho do pool poderia esconder temporariamente o problema.
+Escolhemos utilizar `try-with-resources` para garantir o fechamento automático dos recursos JDBC ao final da operação, inclusive quando ocorre uma exceção. A correção resolve a causa do vazamento de conexões, enquanto apenas aumentar o tamanho do pool poderia esconder temporariamente o problema.
 
 **Placar do grupo após esta decisão:** 🔥 8 · 💰 R$ 35 mil · 🧹 1
 
@@ -119,7 +123,7 @@ Escolhemos utilizar `try-with-resources` para garantir o fechamento automático 
 
 **Justificativa:**
 
-Escolhemos corrigir o método `getInstancia()` do Singleton, que estava criando uma nova instância de `GeradorNumeroConta` a cada chamada. A correção faz com que o gerador compartilhe a instância prevista pelo padrão, reduzindo a possibilidade de inconsistências na geração de números. Como limitação, uma garantia de unicidade entre múltiplas instâncias da aplicação também deve considerar o controle no banco de dados.
+Escolhemos corrigir o método `getInstancia()` do Singleton, que estava criando uma nova instância de `GeradorNumeroConta` a cada chamada. A correção permite compartilhar a instância prevista pelo padrão, reduzindo a possibilidade de inconsistências na geração dos números. Como limitação, a unicidade entre múltiplas instâncias da aplicação também deve considerar o controle no banco de dados.
 
 **Placar do grupo após esta decisão:** 🔥 9 · 💰 R$ 40 mil · 🧹 1
 
@@ -131,7 +135,7 @@ Escolhemos corrigir o método `getInstancia()` do Singleton, que estava criando 
 
 **Justificativa:**
 
-Escolhemos corrigir a ordem dos parâmetros da transferência para que o pagador e o recebedor sejam registrados corretamente nos novos comprovantes. A mudança evita que novas operações apresentem informações trocadas, embora os registros históricos incorretos permaneçam como um problema que precisa ser avaliado separadamente.
+Escolhemos corrigir a ordem dos parâmetros da transferência para que pagador e recebedor sejam registrados corretamente nos novos comprovantes. A mudança evita que novas operações apresentem informações trocadas, embora os registros históricos incorretos permaneçam como um problema que precisa ser avaliado separadamente.
 
 **Placar do grupo após esta decisão:** 🔥 10 · 💰 R$ 55 mil · 🧹 2
 
@@ -171,13 +175,35 @@ Escolhemos utilizar o padrão Builder para permitir a criação da conta com ape
 
 ---
 
+## ⚡ EVENTO RELÂMPAGO D — O teste verde que não testa nada
+
+**Horário:** 03h20
+
+**Tipo:** relâmpago · **Voto:** A
+
+**Evidência:**
+
+O teste `depositoDeveCreditarValorInformado()` executava o método `depositar(50.0)`, mas não possuía nenhuma asserção para verificar o saldo resultante.
+
+**Decisão:** adicionar o `assert` que falta.
+
+**Justificativa:**
+
+Escolhemos adicionar uma asserção ao teste para verificar se o depósito realmente credita o valor informado no saldo da conta. Um teste sem `assert` pode terminar com sucesso mesmo quando o comportamento esperado está incorreto, gerando falsa segurança antes do deploy. A correção exige pouco tempo, mas torna a suíte mais confiável e reduz o risco de regressões.
+
+**Consequência técnica:** a suíte passa a verificar o comportamento esperado do depósito, em vez de apenas executar o método.
+
+**Placar do grupo após esta decisão:** 🔥 9 · 💰 R$ 55 mil · 🧹 1
+
+---
+
 ## 📊 Resumo do placar atual
 
 | Indicador | Placar |
 |---|---:|
 | 🔥 | 9 |
 | 💰 | R$ 55 mil |
-| 🧹 | 2 |
+| 🧹 | 1 |
 
 *O placar será atualizado após cada nova rodada ou evento relâmpago aplicável ao grupo.*
 
@@ -189,13 +215,14 @@ Uma linha por decisão registrada acima (usem os títulos ditados em aula):
 
 | # | Decisão | Nossa letra | Consequência que ELA teria tido |
 |---|---|---|---|
-| 1 | R1 — O saldo que virou negativo | C | Corrige a validação de saldo e adiciona teste automatizado. |
+| 1 | R1 — O saldo que virou negativo | C | Corrige a validação do saldo e adiciona teste automatizado. |
 | 2 | R2 — A injeção que derreteu o banco | A | Utiliza `PreparedStatement` com parâmetros vinculados. |
 | 3 | Evento Relâmpago B — As conexões se fecham | A | Fecha os recursos JDBC automaticamente com `try-with-resources`. |
 | 4 | R3 — A noite das contas gêmeas | A | Corrige o Singleton do gerador de números de conta. |
 | 5 | R4 — O comprovante que aponta pra pessoa errada | A | Corrige a ordem dos dados nos novos comprovantes. |
 | 6 | R5 — A fábrica que devolveu null | A | Lança exceção para tipo de conta inválido. |
 | 7 | Evento Relâmpago C — O cadastro com metade dos campos | B | Utiliza Builder com valores padrão e validação no `build()`. |
+| 8 | Evento Relâmpago D — O teste verde que não testa nada | A | Adiciona uma asserção para verificar o resultado do depósito. |
 
 *(Adicionem linhas conforme as decisões da madrugada.)*
 
