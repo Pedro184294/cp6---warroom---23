@@ -8,7 +8,7 @@
 > **Os incidentes da madrugada são revelados só em aula.** O título de cada registro
 > será **ditado pelo professor na hora**; ninguém se antecipe.
 
-**Grupo (nome da equipe plantonista):** _________________Grupo 23________________
+**Grupo (nome da equipe plantonista):** ______________________________________
 
 **Turma:** 2CCPG **Repo:** `cp6---warroom---23`
 
@@ -36,6 +36,7 @@ rodada seguinte):
 decisao: R1 - opcao C (corrige saldo e adiciona teste)
 decisao: R2 - opcao A (PreparedStatement com parametros vinculados)
 decisao: R3 - opcao A (corrige Singleton do gerador de contas)
+decisao: R4 - opcao A (corrige novos extratos)
 pos-mortem: relatorio de incidente da madrugada
 ```
 
@@ -115,6 +116,16 @@ Escolhemos corrigir o padrão Singleton para que o método `getInstancia()` reto
 
 **Placar do grupo após esta decisão:** 🔥 9 · 💰 R$ 40 mil · 🧹 1
 
+## O comprovante que aponta pra pessoa errada
+
+**Tipo:** rodada · **Voto:** A
+
+**Justificativa:**
+
+Escolhemos corrigir a gravação dos novos extratos para registrar corretamente o pagador e o destinatário da transferência. A correção é rápida e melhora a confiabilidade dos próximos comprovantes, mas mantém o histórico antigo incorreto, criando um risco para auditoria que deverá ser tratado posteriormente.
+
+**Placar do grupo após esta decisão:** 🔥 10 · 💰 R$ 55 mil · 🧹 2
+
 ---
 
 ## 🔎 O caminho do MEU grupo (preencher na 3ª aula, quando o mapa for revelado)
@@ -127,6 +138,7 @@ Uma linha por decisão registrada acima (usem os títulos ditados em aula):
 | 2 | A injeção que derreteu o banco | A | Usar `PreparedStatement` com parâmetros vinculados; sem alteração no placar. |
 | 3 | As conexões se fecham | A | Corrigir o vazamento com `try-with-resources`; sem alteração no placar. |
 | 4 | A noite das contas gêmeas | A | Corrigir o Singleton; reputação +1, prejuízo +R$ 5 mil e dívida técnica sem alteração. |
+| 5 | O comprovante que aponta pra pessoa errada | A | Corrigir os novos extratos; reputação +1, prejuízo +R$ 15 mil e dívida técnica +1. |
 
 *(Adicionem linhas conforme as decisões da madrugada. Completem as consequências finais quando o mapa for revelado.)*
 
