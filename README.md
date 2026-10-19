@@ -8,7 +8,7 @@
 > **Os incidentes da madrugada são revelados só em aula.** O título de cada registro
 > será **ditado pelo professor na hora**; ninguém se antecipe.
 
-**Grupo (nome da equipe plantonista):** ______________Grupo23________________________
+**Grupo (nome da equipe plantonista):** _________Grupo 23_____________________________
 
 **Turma:** 2CCPG **Repo:** `cp6---warroom---23`
 
@@ -25,10 +25,9 @@
 
 ## 0. Setup do repositório (antes da 1ª aula; podem apagar esta seção depois)
 
-1. Repositório público criado no GitHub.
-2. O conteúdo do `README.md` foi organizado conforme a ficha de decisões do grupo.
+1. Repositório público criado no GitHub: `cp6---warroom---23`.
+2. O `README.md` foi atualizado para registrar as decisões tomadas em aula.
 3. Repositório do grupo: https://github.com/Pedro184294/cp6---warroom---23
-4. Commit inicial previsto no modelo: `chore: ficha em branco do grupo`.
 
 **Convenção de commits** (1 commit por rodada; relâmpagos podem ir junto com a
 rodada seguinte):
@@ -67,13 +66,12 @@ segurança × faturamento × dívida). "Porque é mais seguro" não é justifica
 
 # 📝 REGISTRO DE DECISÕES
 
-> A cada incidente, o professor dita o título (ex.: "Rodada 1"). **Copiem o modelo
-> abaixo, colem no fim desta seção** e preencham com o rascunho feito em aula, junto
-> com o **placar do grupo** após a consequência. Commitem 1 commit por rodada até
-> 23h59 do dia.
+> A cada incidente, o professor dita o título. Registrem a alternativa escolhida,
+> a justificativa e o placar após a consequência.
 >
-> **Eventos relâmpago:** registrem apenas se o grupo for **afetado** (o professor
-> chama quem for; não ser chamado é bom sinal).
+> **Eventos relâmpago:** registrem apenas se o grupo for afetado e chamado pelo professor.
+
+*(Placar inicial: 🔥 7 · 💰 R$ 0 mil · 🧹 2)*
 
 ## O saldo que virou negativo
 
@@ -95,9 +93,17 @@ Escolhemos utilizar `PreparedStatement` com parâmetros vinculados para impedir 
 
 **Placar do grupo após esta decisão:** 🔥 8 · 💰 R$ 35 mil · 🧹 1
 
----
+## As conexões se fecham
 
-*(As decisões seguintes devem ser adicionadas aqui, na ordem em que os incidentes forem apresentados em aula. Placar inicial: 🔥 7 · 💰 0 · 🧹 2.)*
+**Tipo:** relâmpago · **Voto:** A
+
+**Justificativa:**
+
+Escolhemos utilizar `try-with-resources` para garantir que as conexões e os demais recursos JDBC sejam fechados automaticamente após cada operação, inclusive em caso de exceção. A correção leva aproximadamente 30 minutos, mas resolve a causa do vazamento e melhora a estabilidade da aplicação, em vez de apenas aumentar o pool de conexões.
+
+**Placar do grupo após esta decisão:** 🔥 8 · 💰 R$ 35 mil · 🧹 1
+
+---
 
 ## 🔎 O caminho do MEU grupo (preencher na 3ª aula, quando o mapa for revelado)
 
@@ -105,11 +111,11 @@ Uma linha por decisão registrada acima (usem os títulos ditados em aula):
 
 | # | Decisão | Nossa letra | Consequência que ELA teria tido |
 |---|---|---|---|
-| 1 | O saldo que virou negativo | C | Corrigir a validação do saldo e adicionar teste; reputação +1, prejuízo +R$ 35 mil e dívida técnica −1. |
-| 2 | A injeção que derreteu o banco | A | Usar `PreparedStatement` com parâmetros vinculados; sem alteração no placar. |
-| | | | |
+| 1 | O saldo que virou negativo | C | Correção da validação do saldo e teste automatizado; reputação +1, prejuízo +R$ 35 mil e dívida técnica −1. |
+| 2 | A injeção que derreteu o banco | A | Uso de `PreparedStatement` com parâmetros vinculados; sem alteração no placar. |
+| 3 | As conexões se fecham | A | Correção do vazamento com `try-with-resources`; sem alteração no placar. |
 
-*(Adicionem linhas conforme as decisões da madrugada.)*
+*(Adicionem linhas conforme as decisões da madrugada. Completem as consequências finais quando o mapa for revelado.)*
 
 ---
 
