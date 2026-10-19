@@ -10,9 +10,7 @@
 
 **Grupo (nome da equipe plantonista):** Grupo 23
 
-**Turma:** 2CCPG 
-
-**Repo:** `cp6---warroom---23`
+**Turma:** 2CCPG **Repo:** `cp6---warroom---23`
 
 **Integrantes (nome + RM):**
 
@@ -35,8 +33,8 @@
    ```bash
    git clone https://github.com/Pedro184294/cp6---warroom---23.git
    cd cp6---warroom---23
-   git add .
-   git commit -m "chore: atualiza ficha de decisoes do grupo"
+   git add README.md
+   git commit -m "docs: atualiza ficha de decisoes do grupo"
    git push
    ```
 
@@ -175,17 +173,15 @@ O Builder permite montar objetos com vários campos de maneira mais legível e c
 
 ## Relâmpago D — O teste verde que não testa nada
 
-**Tipo:** relâmpago · **Voto:** A — *confirmar votação oficial do grupo*
+**Tipo:** relâmpago · **Voto:** A
 
-**Decisão proposta:** Adicionar a asserção ausente para que o teste valide efetivamente o comportamento esperado.
+**Decisão:** Adicionar a asserção ausente para que o teste valide efetivamente o comportamento esperado.
 
 **Justificativa:**
 
 Um teste sem uma asserção adequada pode terminar sem detectar uma regressão, produzindo uma falsa sensação de segurança. Adicionar `assertEquals` ou `assertThrows`, conforme o cenário, faz com que a suíte verifique o resultado esperado em vez de apenas executar o código.
 
-**Placar após esta decisão, caso A tenha sido confirmada:** 🔥 9 · 💰 R$ 55 mil · 🧹 1
-
-> **Atenção:** confirmar se o grupo realmente votou na opção A deste relâmpago. Até essa confirmação, o placar da Rodada 6 abaixo considera apenas as decisões confirmadas até o Relâmpago C.
+**Placar do grupo após esta decisão:** 🔥 9 · 💰 R$ 55 mil · 🧹 1
 
 ## Rodada 6 — O teste vermelho às 03h45
 
@@ -215,9 +211,7 @@ private static final double TAXA_TED = 5.00;
 
 O cálculo da taxa TED deve utilizar `TAXA_TED`, e o teste deve continuar validando o valor contratual. A correção deve ser seguida da execução da suíte de testes antes do próximo deploy.
 
-**Placar do grupo após esta decisão, sem contabilizar o Relâmpago D ainda não confirmado:** 🔥 8 · 💰 R$ 85 mil · 🧹 1
-
-**Placar caso o Relâmpago D — opção A — seja confirmado:** 🔥 8 · 💰 R$ 85 mil · 🧹 0
+**Placar do grupo após esta decisão:** 🔥 8 · 💰 R$ 85 mil · 🧹 0
 
 ---
 
@@ -234,10 +228,10 @@ Uma linha por decisão registrada acima (usem os títulos ditados em aula):
 | 5 | O comprovante que aponta pra pessoa errada | A | Corrige a ordem dos dados nas novas transferências; 🔥 +1 · 💰 +15 mil · 🧹 +1 |
 | 6 | A fábrica que devolveu null | A | Falha explícita para tipo inválido; 🔥 −1 |
 | 7 | O cadastro com metade dos campos | B | Builder com valores padrão e validação; sem alteração no placar |
-| 8 | O teste verde que não testa nada | A — confirmar | Adiciona asserção ao teste; 🧹 −1, se confirmado |
-| 9 | O teste vermelho às 03h45 | B | Corrige a taxa TED, perde a janela; 🔥 −1 · 💰 +30 mil · 🧹 −1 |
+| 8 | O teste verde que não testa nada | A | Adiciona asserção ao teste; 🧹 −1 |
+| 9 | O teste vermelho às 03h45 | B | Corrige a taxa TED e perde a janela; 🔥 −1 · 💰 +30 mil · 🧹 −1 |
 
-*(Adicionem linhas conforme as decisões da madrugada e ajustem o registro do Relâmpago D após confirmar a votação.)*
+*(Adicionem linhas conforme as decisões da madrugada.)*
 
 ---
 
