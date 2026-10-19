@@ -1,6 +1,6 @@
 # FICHA DE DECISÕES · War Room FiapBank (CP6 · 3 aulas)
 
-> Este arquivo é o **README.md do repositório do grupo** (`cp6-warroom-<nome-do-grupo>`).
+> Este arquivo é o **README.md do repositório do grupo** (`cp6-warroom-23`).
 > Vale **5,0 pontos** (rodadas 0,5 · relâmpagos 0,3), e a nota é pela
 > **justificativa**, não pela letra. Preencham após cada aula e commitem até
 > **23h59 do mesmo dia** (regras completas na seção 5 do enunciado).
@@ -8,9 +8,9 @@
 > **Os incidentes da madrugada são revelados só em aula.** O título de cada registro
 > será **ditado pelo professor na hora**; ninguém se antecipe.
 
-**Grupo (nome da equipe plantonista):** _____________Grupo 23_________________________
+**Grupo (nome da equipe plantonista):** Grupo 23
 
-**Turma:** 2CCPG **Repo:** `cp6---warroom---23`
+**Turma:** 2CCPG **Repo:** [`cp6-warroom-23`](https://github.com/Pedro184294/cp6---warroom---23)
 
 **Integrantes (nome + RM):**
 
@@ -25,19 +25,20 @@
 
 ## 0. Setup do repositório (antes da 1ª aula; podem apagar esta seção depois)
 
-1. Repositório público criado no GitHub: `cp6---warroom---23`.
-2. O `README.md` foi atualizado para registrar as decisões tomadas em aula.
-3. Repositório do grupo: https://github.com/Pedro184294/cp6---warroom---23
+1. O repositório do grupo deve ser **público** no GitHub.
+2. O `README.md` deve conter a ficha de decisões atualizada.
+3. O histórico deve registrar as decisões com commits separados, seguindo a convenção definida pelo professor.
+4. Postem o **link no Teams** (o mesmo link para todo o grupo).
 
-**Convenção de commits** (1 commit por rodada; relâmpagos podem ir junto com a
-rodada seguinte):
+**Convenção de commits** (1 commit por rodada; relâmpagos podem ir junto com a rodada seguinte):
 
-```text
+```bash
 decisao: R1 - opcao C (corrige saldo e adiciona teste)
 decisao: R2 - opcao A (PreparedStatement com parametros vinculados)
 decisao: R3 - opcao A (corrige Singleton do gerador de contas)
 decisao: R4 - opcao A (corrige novos extratos)
 decisao: R5 - opcao A (excecao para tipo de conta invalido)
+decisao: Evento Relampago C - opcao B (Builder com valores padrao)
 pos-mortem: relatorio de incidente da madrugada
 ```
 
@@ -61,81 +62,124 @@ pos-mortem: relatorio de incidente da madrugada
 | Consultas ao banco | sempre parametrizadas, e cada operação **usa e libera** a conexão |
 | Suíte de testes | roda antes de todo deploy; **verde** é pré-requisito pra subir |
 
-**Como escrever a justificativa:** nomeie o **mecanismo técnico** em jogo (o
-conceito das Aulas 11 a 15 que explica o incidente) e o **trade-off** (velocidade ×
-segurança × faturamento × dívida). "Porque é mais seguro" não é justificativa.
+**Como escrever a justificativa:** nomeie o **mecanismo técnico** em jogo (o conceito das Aulas 11 a 15 que explica o incidente) e o **trade-off** (velocidade × segurança × faturamento × dívida). "Porque é mais seguro" não é justificativa.
 
 ---
 
 # 📝 REGISTRO DE DECISÕES
 
-> A cada incidente, o professor dita o título. Registrem a alternativa escolhida,
-> a justificativa e o placar após a consequência.
+> A cada incidente, o professor dita o título. Registrem a decisão tomada pelo grupo,
+> incluindo a justificativa técnica e o placar após a consequência.
 >
-> **Eventos relâmpago:** registrem apenas se o grupo for **afetado** (o professor
-> chama quem for; não ser chamado é bom sinal).
+> **Eventos relâmpago:** registrem apenas se o grupo for **afetado** e chamado pelo professor.
 
 *(Placar inicial: 🔥 7 · 💰 R$ 0 mil · 🧹 2)*
 
-## O saldo que virou negativo
+---
+
+## R1 — O saldo que virou negativo
 
 **Tipo:** rodada · **Voto:** C
 
 **Justificativa:**
 
-Escolhemos corrigir a validação do saldo e adicionar um teste com `assertThrows` para garantir que uma transferência sem saldo suficiente seja recusada. A solução exige tempo para corrigir e testar, mas aumenta a confiabilidade do sistema e reduz a dívida técnica, evitando que o saldo fique negativo.
+Escolhemos corrigir a validação do saldo e adicionar um teste com `assertThrows` para verificar se a operação sem saldo suficiente é recusada. Corrigir a causa do problema junto com um teste automatizado reduz o risco de regressão e protege a regra de negócio, mesmo exigindo esforço adicional no desenvolvimento.
 
 **Placar do grupo após esta decisão:** 🔥 8 · 💰 R$ 35 mil · 🧹 1
 
-## A injeção que derreteu o banco
+---
+
+## R2 — A injeção que derreteu o banco
 
 **Tipo:** rodada · **Voto:** A
 
 **Justificativa:**
 
-Escolhemos utilizar `PreparedStatement` com parâmetros vinculados para impedir que os dados informados pelo usuário sejam interpretados como parte do comando SQL. Essa solução corrige a vulnerabilidade de SQL Injection e mantém a funcionalidade de busca disponível, priorizando a segurança sem precisar remover o endpoint.
+Escolhemos utilizar `PreparedStatement` com parâmetros vinculados para evitar que dados informados pelo usuário sejam interpretados como parte do comando SQL. Essa abordagem reduz o risco de SQL Injection e prioriza a segurança e a integridade dos dados, em vez de manter uma implementação vulnerável por conveniência.
 
 **Placar do grupo após esta decisão:** 🔥 8 · 💰 R$ 35 mil · 🧹 1
 
-## As conexões se fecham
+---
+
+## ⚡ EVENTO RELÂMPAGO B — As conexões se fecham
 
 **Tipo:** relâmpago · **Voto:** A
 
 **Justificativa:**
 
-Escolhemos utilizar `try-with-resources` para garantir que as conexões e os demais recursos JDBC sejam fechados automaticamente após cada operação, inclusive em caso de exceção. A correção leva aproximadamente 30 minutos, mas resolve a causa do vazamento e melhora a estabilidade da aplicação, em vez de apenas aumentar o pool de conexões.
+Escolhemos utilizar `try-with-resources` para garantir o fechamento automático dos recursos JDBC ao final da operação, inclusive quando ocorre uma exceção. Embora a correção exija alterar o código, ela resolve a causa do vazamento de conexões, enquanto apenas aumentar o tamanho do pool poderia esconder temporariamente o problema.
 
 **Placar do grupo após esta decisão:** 🔥 8 · 💰 R$ 35 mil · 🧹 1
 
-## A noite das contas gêmeas
+---
+
+## R3 — A noite das contas gêmeas
 
 **Tipo:** rodada · **Voto:** A
 
 **Justificativa:**
 
-Escolhemos corrigir o padrão Singleton para que o método `getInstancia()` retorne a mesma instância do gerador, em vez de criar um novo objeto a cada chamada. Essa correção resolve o defeito identificado na implementação e melhora a confiabilidade do sistema, com impacto controlado no prazo e no custo.
+Escolhemos corrigir o método `getInstancia()` do Singleton, que estava criando uma nova instância de `GeradorNumeroConta` a cada chamada. A correção faz com que o gerador compartilhe a instância prevista pelo padrão, reduzindo a possibilidade de inconsistências na geração de números. Como limitação, uma garantia de unicidade entre múltiplas instâncias da aplicação também deve considerar o controle no banco de dados.
 
 **Placar do grupo após esta decisão:** 🔥 9 · 💰 R$ 40 mil · 🧹 1
 
-## O comprovante que aponta pra pessoa errada
+---
+
+## R4 — O comprovante que aponta pra pessoa errada
 
 **Tipo:** rodada · **Voto:** A
 
 **Justificativa:**
 
-Escolhemos corrigir a gravação dos novos extratos para registrar corretamente o pagador e o destinatário da transferência. A correção é rápida e melhora a confiabilidade dos próximos comprovantes, mas mantém o histórico antigo incorreto, criando um risco para auditoria que deverá ser tratado posteriormente.
+Escolhemos corrigir a ordem dos parâmetros da transferência para que o pagador e o recebedor sejam registrados corretamente nos novos comprovantes. A mudança evita que novas operações apresentem informações trocadas, embora os registros históricos incorretos permaneçam como um problema que precisa ser avaliado separadamente.
 
 **Placar do grupo após esta decisão:** 🔥 10 · 💰 R$ 55 mil · 🧹 2
 
-## A fábrica que devolveu null
+---
+
+## R5 — A fábrica que devolveu null
 
 **Tipo:** rodada · **Voto:** A
 
 **Justificativa:**
 
-Escolhemos aplicar a estratégia fail-fast na `ContaFactory`, lançando uma exceção clara quando o tipo de conta informado não for reconhecido, em vez de devolver `null`. Assim, o erro é identificado na origem, evitando falhas posteriores ao utilizar um objeto nulo. A decisão reduz o risco de comportamento inesperado sem aumentar a dívida técnica, embora tenha impacto de reputação conforme a tabela do incidente.
+Escolhemos lançar uma exceção quando o tipo de conta informado for inválido, em vez de retornar `null`. Essa decisão torna a falha explícita e facilita identificar o erro no ponto em que ocorre, reduzindo o risco de uma `NullPointerException` aparecer posteriormente em outra parte da aplicação. O trade-off é que a chamada passa a exigir tratamento adequado da exceção.
 
 **Placar do grupo após esta decisão:** 🔥 9 · 💰 R$ 55 mil · 🧹 2
+
+---
+
+## ⚡ EVENTO RELÂMPAGO C — O cadastro com metade dos campos
+
+**Horário:** 02h20
+
+**Tipo:** relâmpago · **Voto:** B
+
+**Evidência:**
+
+> Marketing: "a landing da madrugada vai cadastrar com SÓ nome e saldo, sem CPF, sem tipo. Faz ficar? O construtor atual exige tudo."
+
+**Decisão:** Builder com valores padrão.
+
+**Justificativa:**
+
+Escolhemos utilizar o padrão Builder para permitir a criação da conta com apenas os campos necessários, concentrando os valores padrão e as validações no método `build()`. Essa abordagem evita aumentar a quantidade de construtores sobrecarregados e mantém a lógica de criação organizada. Também permite validar os dados antes de construir o objeto, reduzindo o risco de aceitar campos inválidos ou inconsistentes.
+
+**Consequência técnica:** o Builder centraliza os valores padrão e as validações no momento da construção do objeto.
+
+**Placar do grupo após esta decisão:** 🔥 9 · 💰 R$ 55 mil · 🧹 2
+
+---
+
+## 📊 Resumo do placar atual
+
+| Indicador | Placar |
+|---|---:|
+| 🔥 | 9 |
+| 💰 | R$ 55 mil |
+| 🧹 | 2 |
+
+*O placar será atualizado após cada nova rodada ou evento relâmpago aplicável ao grupo.*
 
 ---
 
@@ -145,14 +189,15 @@ Uma linha por decisão registrada acima (usem os títulos ditados em aula):
 
 | # | Decisão | Nossa letra | Consequência que ELA teria tido |
 |---|---|---|---|
-| 1 | O saldo que virou negativo | C | Corrigir a validação do saldo e adicionar teste; reputação +1, prejuízo +R$ 35 mil e dívida técnica −1. |
-| 2 | A injeção que derreteu o banco | A | Usar `PreparedStatement` com parâmetros vinculados; sem alteração no placar. |
-| 3 | As conexões se fecham | A | Corrigir o vazamento com `try-with-resources`; sem alteração no placar. |
-| 4 | A noite das contas gêmeas | A | Corrigir o Singleton; reputação +1, prejuízo +R$ 5 mil e dívida técnica sem alteração. |
-| 5 | O comprovante que aponta pra pessoa errada | A | Corrigir os novos extratos; reputação +1, prejuízo +R$ 15 mil e dívida técnica +1. |
-| 6 | A fábrica que devolveu null | A | Lançar exceção para tipo inválido; reputação −1, sem alteração no prejuízo e na dívida técnica. |
+| 1 | R1 — O saldo que virou negativo | C | Corrige a validação de saldo e adiciona teste automatizado. |
+| 2 | R2 — A injeção que derreteu o banco | A | Utiliza `PreparedStatement` com parâmetros vinculados. |
+| 3 | Evento Relâmpago B — As conexões se fecham | A | Fecha os recursos JDBC automaticamente com `try-with-resources`. |
+| 4 | R3 — A noite das contas gêmeas | A | Corrige o Singleton do gerador de números de conta. |
+| 5 | R4 — O comprovante que aponta pra pessoa errada | A | Corrige a ordem dos dados nos novos comprovantes. |
+| 6 | R5 — A fábrica que devolveu null | A | Lança exceção para tipo de conta inválido. |
+| 7 | Evento Relâmpago C — O cadastro com metade dos campos | B | Utiliza Builder com valores padrão e validação no `build()`. |
 
-*(Adicionem linhas conforme as decisões da madrugada. Completem as consequências finais quando o mapa for revelado.)*
+*(Adicionem linhas conforme as decisões da madrugada.)*
 
 ---
 
